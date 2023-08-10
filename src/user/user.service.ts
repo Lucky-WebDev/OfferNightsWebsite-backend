@@ -58,32 +58,41 @@ export class UserService {
     return await this.userModel.findOne({ email }).exec();
   }
 
-  async signup(user: User): Promise<User> {
-    const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(user.password, salt);
+  async signup(user: User): Promise<any> {
+    let doubleEmail = await this.userModel.findOne({
+      email: user.email
+    })
 
-    const avatar = normalize(
-      gravatar.url(user.email, {
-        s: '200',
-        r: 'pg',
-        d: 'mm'
-      })
-    )
-
-    const reqBody = {
-        type: user.type,
-        firstName: user.firstName,
-        middleName: user.middleName,
-        lastName: user.lastName,
-        avatar: avatar,
-        cell: user.cell,
-        email: user.email,
-        password: hash,
-        termAgree: user.termAgree
+    if(doubleEmail) {
+      return {double: true}
+    } else {
+      const salt = await bcrypt.genSalt();
+      const hash = await bcrypt.hash(user.password, salt);
+  
+      const avatar = normalize(
+        gravatar.url(user.email, {
+          s: '200',
+          r: 'pg',
+          d: 'mm'
+        })
+      )
+  
+      const reqBody = {
+          type: user.type,
+          firstName: user.firstName,
+          middleName: user.middleName,
+          lastName: user.lastName,
+          avatar: avatar,
+          cell: user.cell,
+          email: user.email,
+          password: hash,
+          termAgree: user.termAgree
+      }
+      const newUser = new this.userModel(reqBody);
+      let responseData = await newUser.save();
+      return responseData
     }
-    const newUser = new this.userModel(reqBody);
-    let responseData = await newUser.save();
-    return responseData
+    
   }
 
   async signin(user: User): Promise<any> {

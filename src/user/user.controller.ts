@@ -31,9 +31,12 @@ export class UserController {
   async signupUser(@Res() response, @Body() user: User) {
     try {
       let param = await validateAsync(user, ['firstName', 'lastName', 'cell', 'email', 'password', 'type']);
-      const newUser = await this.userService.signup(user);
-      let result = this.Handler.success(response, newUser);
-      return result
+      const result = await this.userService.signup(user);
+
+      if(result.double == true) {
+        return this.Handler.success(response, {double: true});
+      }
+      return this.Handler.success(response, result);
     }
     catch (error) {
         return this.Handler.errorException(response, error);
