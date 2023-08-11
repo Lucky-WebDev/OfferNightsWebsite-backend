@@ -83,7 +83,6 @@ export class UserService {
           middleName: user.middleName,
           lastName: user.lastName,
           avatar: avatar,
-          cell: user.cell,
           email: user.email,
           password: hash,
           termAgree: user.termAgree
@@ -93,6 +92,12 @@ export class UserService {
       return responseData
     }
     
+  }
+
+  async addPhone(id: string, data: any): Promise<any> {
+    const updatedProfile = await this.userModel
+      .findByIdAndUpdate(id, {cell: data.phone, status: 'active'}, { new: true });
+    return updatedProfile;
   }
 
   async signin(user: User): Promise<any> {

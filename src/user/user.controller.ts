@@ -30,13 +30,29 @@ export class UserController {
   @Post('/sign-up')
   async signupUser(@Res() response, @Body() user: User) {
     try {
-      let param = await validateAsync(user, ['firstName', 'lastName', 'cell', 'email', 'password', 'type']);
+      let param = await validateAsync(user, ['firstName', 'lastName', 'email', 'password', 'type']);
       const result = await this.userService.signup(user);
 
       if(result.double == true) {
         return this.Handler.success(response, {double: true});
       }
       return this.Handler.success(response, result);
+    }
+    catch (error) {
+        return this.Handler.errorException(response, error);
+    }
+  }
+
+  // Add phone
+  @Post('/add-phone/:id')
+  async addPhone(@Param('id') id: string, @Res() response, @Body() data: any) {
+    try {
+      let result = await this.userService.addPhone(id, data);
+
+      return response.status(HttpStatus.OK).json({
+        message: 'Profile has been successfully updated',
+        profile: result
+      })
     }
     catch (error) {
         return this.Handler.errorException(response, error);

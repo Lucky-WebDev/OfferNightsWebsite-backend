@@ -23,7 +23,7 @@ export class User {
     @Prop({required:false, default: '' })
     avatar: string
 
-    @Prop({required:true })
+    @Prop({required:false })
     cell: string; 
 
     @Prop({required:true, unique:true })
@@ -50,7 +50,7 @@ export class User {
     @Prop({required:false})
     termAgree: boolean;
 
-    @Prop({required:false, default: 'active'})
+    @Prop({required:false, default: 'inactive'})
     status: string;
 
     @Prop({required:false, default: Date.now() })

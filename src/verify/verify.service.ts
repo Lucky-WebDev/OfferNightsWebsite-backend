@@ -21,6 +21,7 @@ export class VerifyService {
   constructor(@InjectModel(User.name) private readonly Handler: Handler, private readonly jwtService: JwtService, private readonly configService: ConfigService) { 
     const accountSid = configService.get('TWILIO_ACCOUNT_SID');
     const authToken = configService.get('TWILIO_AUTH_TOKEN');
+    
 
     this.twilioClient = new Twilio(accountSid, authToken);
   }
@@ -32,13 +33,16 @@ export class VerifyService {
     })
 
     try {
+      const username = this.configService.get('GMAIL_USERNAME');
+      const password = this.configService.get('GMAIL_PASSWORD');
+
       const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
         secure: false,
         auth: {
-          user: "smiledev10162@gmail.com",
-          pass: "kzdyvdevtkhlkjuy",
+          user: username,
+          pass: password,
         },
       });
   
