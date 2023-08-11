@@ -7,6 +7,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { VerifyModule } from './verify/verify.module';
 import { MapModule } from './map/map.module';
 import { ShowingModule } from './showing/showing.module';
+import { BuyerModule } from './buyer/buyer.module';
+import { SellerModule } from './seller/seller.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { ShowingModule } from './showing/showing.module';
     VerifyModule,
     MapModule,
     ShowingModule,
+    BuyerModule,
+    SellerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
