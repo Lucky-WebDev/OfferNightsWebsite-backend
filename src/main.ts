@@ -5,14 +5,14 @@ const cors = require('cors');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(cors({ origin: 'http://localhost:3000' }));
+  app.use(cors({ origin: 'http://192.168.136.185:3000' }));
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:5000',
+      target: 'http://192.168.136.185:5000',
       changeOrigin: true,
     })
   );
-  await app.listen(5000);
+  await app.listen(5000, '0.0.0.0');
 }
 bootstrap();
