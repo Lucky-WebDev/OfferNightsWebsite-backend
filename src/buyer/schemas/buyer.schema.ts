@@ -68,6 +68,9 @@ export class Buyer {
     @Prop({required:false })
     phone: string;
 
+    @Prop({required:false })
+    radius: string;
+
     @Prop({ required:false, default: Date.now() })
     createdDate: Date
 }

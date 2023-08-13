@@ -76,8 +76,9 @@ export class UserService {
           d: 'mm'
         })
       )
-  
-      const reqBody = {
+
+      if(user.type == 'buyer') {
+        const reqBody = {
           type: user.type,
           firstName: user.firstName,
           middleName: user.middleName,
@@ -85,13 +86,28 @@ export class UserService {
           avatar: avatar,
           email: user.email,
           password: hash,
-          termAgree: user.termAgree
+          termAgree: user.termAgree,
+          radius: '5'
+        }
+        const newUser = new this.userModel(reqBody);
+        let responseData = await newUser.save();
+        return responseData
+      } else {
+        const reqBody = {
+          type: user.type,
+          firstName: user.firstName,
+          middleName: user.middleName,
+          lastName: user.lastName,
+          avatar: avatar,
+          email: user.email,
+          password: hash,
+          termAgree: user.termAgree,
+        }
+        const newUser = new this.userModel(reqBody);
+        let responseData = await newUser.save();
+        return responseData
       }
-      const newUser = new this.userModel(reqBody);
-      let responseData = await newUser.save();
-      return responseData
     }
-    
   }
 
   async addPhone(id: string, data: any): Promise<any> {
