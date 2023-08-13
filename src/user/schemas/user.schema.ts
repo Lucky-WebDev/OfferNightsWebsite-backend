@@ -50,6 +50,9 @@ export class User {
     @Prop({required:false})
     termAgree: boolean;
 
+    @Prop({required:false, default: '1'})
+    radius: string;
+
     @Prop({required:false, default: 'inactive'})
     status: string;
 
