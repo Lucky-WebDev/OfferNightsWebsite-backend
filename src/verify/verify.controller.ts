@@ -24,13 +24,13 @@ export class VerifyController {
   }
 
   // Check token
-  @Post('/check-token')
-  async checkToken(@Res() response, @Body() token: any) {
+  @Get('/check-token/:email/:token')
+  async checkToken(@Param('email') email: string, @Param('token') token: string, @Res() response) {
     try {
       // return this.Handler.success(response, {flag: true});
       const check = await this.verifyService.check(token);
       // return response.status(200).json(check);
-      if(check.email == token.email) {
+      if(check.email == email) {
         return this.Handler.success(response, {flag: true});
       } else {
         return this.Handler.errorException(response, {flag: false});

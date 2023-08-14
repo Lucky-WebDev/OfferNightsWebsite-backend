@@ -50,9 +50,9 @@ export class VerifyService {
         from: 'smiledev10162@gmail.com',
         to: email.email,
         subject: "OfferNights",
-        text: token,
+        text: '<p>You requested for email verification, kindly use this <a href="http://192.168.136.185:3000/verify/check-token?email=' + email.email + '&token=' + token + '">link</a> to verify your email address</p>',
       });
-      console.log("email sent sucessfully");
+      console.log("email sent successfully");
       return { 'token': token }
     } catch (error) {
       console.log("email not sent");
@@ -62,7 +62,7 @@ export class VerifyService {
 
   async check(token) {
     try {
-      const payload = await this.jwtService.verify(token.token, {
+      const payload = await this.jwtService.verify(token, {
         secret: "secret"
       })
 

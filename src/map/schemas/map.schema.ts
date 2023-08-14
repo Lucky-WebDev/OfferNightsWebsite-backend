@@ -50,6 +50,12 @@ export class Map {
     road: string;
 
     @Prop({required:false })
+    highway: string;
+
+    @Prop({required:false })
+    suburb: string;
+
+    @Prop({required:false })
     houseNumber: string;
 
     @Prop({required:true })
