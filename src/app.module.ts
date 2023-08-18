@@ -18,16 +18,17 @@ import {  } from '@nestjs/platform-express';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    HttpModule.register({
-      timeout: 5000, // optional timeout value
-      maxRedirects: 5, // optional maximum redirects value
-      responseType: 'json', // optional response type
-      headers: {
-        'Access-Control-Allow-Origin': 'http://192.168.136.185:3000',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    }),
+    // HttpModule.register({
+    //   timeout: 5000, // optional timeout value
+    //   maxRedirects: 5, // optional maximum redirects value
+    //   responseType: 'json', // optional response type
+    //   headers: {
+    //     // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+    //     'Access-Control-Allow-Headers': 'Content-Type',
+    //   },
+    // }),
     UserModule,
     VerifyModule,
     MapModule,
@@ -39,5 +40,5 @@ import {  } from '@nestjs/platform-express';
   providers: [AppService],
 })
 export class AppModule {
-  constructor(private readonly httpService: HttpService) {}
+  // constructor(private readonly httpService: HttpService) {}
 }

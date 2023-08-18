@@ -76,4 +76,13 @@ export class ShowingService {
     let myActiveShowing = await this.showingModel.find({userId: data.userId}).exec();
     return myActiveShowing;
   }
+
+  async listingDoubleCheck(data: any): Promise<any> {
+    const doubleListing = await this.showingModel.findOne({listing: data.listing}).exec();
+    if(doubleListing) {
+      return {flag: false}
+    } else {
+      return {flag: true}
+    }
+  }
 }

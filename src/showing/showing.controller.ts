@@ -95,4 +95,16 @@ export class ShowingController {
         return this.Handler.errorException(response, error);
     }
   }
+
+  @UseGuards(AuthGuard)
+  @Post('/listing-double-check')
+  async listingDoubleCheck(@Res() response, @Body() data: any) {
+    try {
+      const doubleCheck = await this.showingService.listingDoubleCheck(data)
+      let result = this.Handler.success(response, doubleCheck);
+      return result
+    } catch(error) {
+      return this.Handler.errorException(response, error);
+    }
+  }
 }
