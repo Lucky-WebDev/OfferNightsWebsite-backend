@@ -15,7 +15,6 @@
   },
   "include": [
     "src/**/*",
-    "./blog-backend/src"
   ],
   "exclude": [
     "node_modules",

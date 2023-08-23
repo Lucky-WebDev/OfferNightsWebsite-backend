@@ -1,4 +1,4 @@
-# Build a blog using Nest.js, TypeScript, React and MongoDB
+# Build a OfferNights website using Nest.js, TypeScript, React and MongoDB
 
 Application repo for a simple blog application built with Nest.js, TypeScript, React and MongoDB.
 
